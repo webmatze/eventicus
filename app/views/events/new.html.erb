@@ -1,0 +1,24 @@
+<% content_for :title, t("events.form.create") %>
+
+<div class="max-w-2xl mx-auto">
+  <!-- Back Link -->
+  <div class="mb-6">
+    <%= link_to events_path, class: "inline-flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition" do %>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <%= t("events.show.back") %>
+    <% end %>
+  </div>
+
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Event erstellen</h1>
+    <p class="mt-2 text-gray-600 dark:text-gray-400">Teile dein Event mit der Community.</p>
+  </div>
+
+  <!-- Form Card -->
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8">
+    <%= render "form", event: @event %>
+  </div>
+</div>

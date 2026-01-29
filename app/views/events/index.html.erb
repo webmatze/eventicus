@@ -5,14 +5,26 @@
   <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white"><%= t("events.index.title") %></h1>
     
-    <!-- Filters -->
-    <div class="flex flex-wrap gap-2">
-      <%= link_to t("events.index.upcoming"), events_path(filter: nil), 
-          class: "px-4 py-2 rounded-lg text-sm font-medium transition #{params[:filter].blank? ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" %>
-      <%= link_to t("events.index.past"), events_path(filter: :past), 
-          class: "px-4 py-2 rounded-lg text-sm font-medium transition #{params[:filter] == 'past' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" %>
-      <%= link_to t("events.index.all"), events_path(filter: :all), 
-          class: "px-4 py-2 rounded-lg text-sm font-medium transition #{params[:filter] == 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" %>
+    <div class="flex flex-wrap items-center gap-4">
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2">
+        <%= link_to t("events.index.upcoming"), events_path(filter: nil), 
+            class: "px-4 py-2 rounded-lg text-sm font-medium transition #{params[:filter].blank? ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" %>
+        <%= link_to t("events.index.past"), events_path(filter: :past), 
+            class: "px-4 py-2 rounded-lg text-sm font-medium transition #{params[:filter] == 'past' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" %>
+        <%= link_to t("events.index.all"), events_path(filter: :all), 
+            class: "px-4 py-2 rounded-lg text-sm font-medium transition #{params[:filter] == 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}" %>
+      </div>
+
+      <!-- Create Button (visible on larger screens, already in nav for small) -->
+      <% if user_signed_in? %>
+        <%= link_to new_event_path, class: "hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition" do %>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+          </svg>
+          Event erstellen
+        <% end %>
+      <% end %>
     </div>
   </div>
 

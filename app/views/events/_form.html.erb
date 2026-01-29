@@ -1,0 +1,118 @@
+<%= form_with model: event, class: "space-y-6" do |f| %>
+  <% if event.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+      <div class="flex items-center gap-2 text-red-700 mb-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd"/>
+        </svg>
+        <span class="font-medium"><%= pluralize(event.errors.count, "Fehler") %> gefunden:</span>
+      </div>
+      <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
+        <% event.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Title -->
+  <div>
+    <%= f.label :title, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= f.text_field :title, 
+        class: "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition",
+        placeholder: "z.B. Indie Night im Mojo Club" %>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <%= f.label :description, class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= f.text_area :description, 
+        rows: 8,
+        class: "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition",
+        placeholder: "Beschreibe dein Event..." %>
+    <p class="mt-1 text-sm text-gray-500">Tipp: Zeilenumbrüche werden übernommen.</p>
+  </div>
+
+  <!-- Date & Time Grid -->
+  <div class="grid sm:grid-cols-2 gap-4">
+    <!-- Start Date/Time -->
+    <div>
+      <%= f.label :starts_at, "Beginn", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+      <%= f.datetime_local_field :starts_at, 
+          class: "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" %>
+    </div>
+
+    <!-- End Date/Time -->
+    <div>
+      <%= f.label :ends_at, "Ende", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+      <%= f.datetime_local_field :ends_at, 
+          class: "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" %>
+    </div>
+  </div>
+
+  <!-- Location & Category Grid -->
+  <div class="grid sm:grid-cols-2 gap-4">
+    <!-- Location -->
+    <div>
+      <%= f.label :location_id, "Veranstaltungsort", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+      <%= f.collection_select :location_id, 
+          Location.includes(:city).order("cities.name, locations.name"), 
+          :id, 
+          ->(l) { "#{l.name} (#{l.city.name})" },
+          { prompt: "-- Bitte wählen --" },
+          { class: "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" } %>
+      <p class="mt-1 text-sm text-gray-500">
+        Location nicht dabei? 
+        <span class="text-indigo-600">Bald kannst du neue anlegen.</span>
+      </p>
+    </div>
+
+    <!-- Category -->
+    <div>
+      <%= f.label :category_id, "Kategorie", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+      <%= f.collection_select :category_id, 
+          Category.ordered, 
+          :id, 
+          :name,
+          { prompt: "-- Optional --", include_blank: false },
+          { class: "w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" } %>
+    </div>
+  </div>
+
+  <!-- Cover Image -->
+  <div>
+    <%= f.label :cover_image, "Cover-Bild", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+    
+    <% if event.cover_image.attached? %>
+      <div class="mb-4 relative inline-block">
+        <%= image_tag event.cover_image, class: "w-48 h-32 object-cover rounded-lg" %>
+        <span class="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">Aktuell</span>
+      </div>
+    <% end %>
+
+    <div class="flex items-center justify-center w-full">
+      <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+          </svg>
+          <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klicken</span> oder Bild hierher ziehen</p>
+          <p class="text-xs text-gray-500">PNG, JPG oder WebP (max. 5MB)</p>
+        </div>
+        <%= f.file_field :cover_image, 
+            class: "hidden",
+            accept: "image/png,image/jpeg,image/webp",
+            data: { controller: "file-preview" } %>
+      </label>
+    </div>
+  </div>
+
+  <!-- Submit Buttons -->
+  <div class="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+    <%= f.submit event.persisted? ? t("events.form.update") : t("events.form.create"), 
+        class: "px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition cursor-pointer" %>
+    
+    <%= link_to t("common.cancel"), (event.persisted? ? event_path(event) : events_path), 
+        class: "px-6 py-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white font-medium transition" %>
+  </div>
+<% end %>

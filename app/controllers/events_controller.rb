@@ -18,7 +18,10 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = current_user.events.build
+    @event = current_user.events.build(
+      starts_at: 1.week.from_now.change(hour: 19, min: 0),
+      ends_at: 1.week.from_now.change(hour: 22, min: 0)
+    )
   end
 
   def create
