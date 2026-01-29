@@ -1,0 +1,110 @@
+en:
+  activerecord:
+    models:
+      event: Event
+      location: Venue
+      city: City
+      category: Category
+      user: User
+      attendance: Attendance
+    attributes:
+      event:
+        title: Title
+        description: Description
+        starts_at: Starts at
+        ends_at: Ends at
+        location: Venue
+        category: Category
+      location:
+        name: Name
+        street: Street
+        zip: ZIP
+        city: City
+        latitude: Latitude
+        longitude: Longitude
+      city:
+        name: Name
+        state: State
+        country: Country
+      category:
+        name: Name
+        slug: URL slug
+
+  events:
+    index:
+      title: Events
+      upcoming: Upcoming
+      past: Past
+      all: All
+      no_events: No events found.
+      add_event: Add Event
+    show:
+      attend: Attend
+      attending: You're attending
+      attendees: Attendees
+      when: When
+      where: Where
+      back: Back to list
+    form:
+      create: Create Event
+      update: Save Changes
+
+  locations:
+    index:
+      title: Venues
+    show:
+      events_here: Events here
+      address: Address
+
+  cities:
+    index:
+      title: Cities
+    show:
+      events_in: "Events in %{city}"
+      locations_in: "Venues in %{city}"
+
+  categories:
+    index:
+      title: Categories
+    show:
+      events_in_category: "Events: %{category}"
+
+  navigation:
+    events: Events
+    cities: Cities
+    categories: Categories
+    profile: Profile
+    login: Log in
+    logout: Log out
+    signup: Sign up
+
+  common:
+    back: Back
+    edit: Edit
+    delete: Delete
+    save: Save
+    cancel: Cancel
+    search: Search
+    loading: Loading...
+    no_results: No results
+    created_at: Created
+    updated_at: Updated
+
+  flash:
+    event_created: Event was created.
+    event_updated: Event was updated.
+    event_deleted: Event was deleted.
+    attendance_created: You're now attending!
+    attendance_deleted: Attendance removed.
+    login_required: Please log in.
+
+  time:
+    formats:
+      short: "%m/%d/%Y %I:%M %p"
+      long: "%A, %B %d, %Y at %I:%M %p"
+      date_only: "%m/%d/%Y"
+
+  date:
+    formats:
+      short: "%m/%d/%Y"
+      long: "%A, %B %d, %Y"

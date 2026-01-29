@@ -1,0 +1,18 @@
+<% content_for :title, t("categories.index.title") %>
+
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white"><%= t("categories.index.title") %></h1>
+
+  <% if @categories.any? %>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <% @categories.each do |category| %>
+        <%= link_to category_path(category), class: "block bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition" do %>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white"><%= category.name %></h2>
+          <p class="text-sm text-indigo-600 mt-2"><%= category.event_count %> <%= t("events.index.upcoming").downcase %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500"><%= t("common.no_results") %></p>
+  <% end %>
+</div>

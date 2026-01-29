@@ -1,0 +1,110 @@
+de:
+  activerecord:
+    models:
+      event: Veranstaltung
+      location: Veranstaltungsort
+      city: Stadt
+      category: Kategorie
+      user: Benutzer
+      attendance: Teilnahme
+    attributes:
+      event:
+        title: Titel
+        description: Beschreibung
+        starts_at: Beginn
+        ends_at: Ende
+        location: Veranstaltungsort
+        category: Kategorie
+      location:
+        name: Name
+        street: Straße
+        zip: PLZ
+        city: Stadt
+        latitude: Breitengrad
+        longitude: Längengrad
+      city:
+        name: Name
+        state: Bundesland
+        country: Land
+      category:
+        name: Name
+        slug: URL-Kürzel
+
+  events:
+    index:
+      title: Veranstaltungen
+      upcoming: Kommende
+      past: Vergangene
+      all: Alle
+      no_events: Keine Veranstaltungen gefunden.
+      add_event: Veranstaltung hinzufügen
+    show:
+      attend: Teilnehmen
+      attending: Du nimmst teil
+      attendees: Teilnehmer
+      when: Wann
+      where: Wo
+      back: Zurück zur Liste
+    form:
+      create: Veranstaltung erstellen
+      update: Änderungen speichern
+
+  locations:
+    index:
+      title: Veranstaltungsorte
+    show:
+      events_here: Veranstaltungen hier
+      address: Adresse
+
+  cities:
+    index:
+      title: Städte
+    show:
+      events_in: "Veranstaltungen in %{city}"
+      locations_in: "Veranstaltungsorte in %{city}"
+
+  categories:
+    index:
+      title: Kategorien
+    show:
+      events_in_category: "Veranstaltungen: %{category}"
+
+  navigation:
+    events: Veranstaltungen
+    cities: Städte
+    categories: Kategorien
+    profile: Profil
+    login: Anmelden
+    logout: Abmelden
+    signup: Registrieren
+
+  common:
+    back: Zurück
+    edit: Bearbeiten
+    delete: Löschen
+    save: Speichern
+    cancel: Abbrechen
+    search: Suchen
+    loading: Lädt...
+    no_results: Keine Ergebnisse
+    created_at: Erstellt am
+    updated_at: Aktualisiert am
+
+  flash:
+    event_created: Veranstaltung wurde erstellt.
+    event_updated: Veranstaltung wurde aktualisiert.
+    event_deleted: Veranstaltung wurde gelöscht.
+    attendance_created: Du nimmst jetzt teil!
+    attendance_deleted: Teilnahme wurde entfernt.
+    login_required: Bitte melde dich an.
+
+  time:
+    formats:
+      short: "%d.%m.%Y %H:%M"
+      long: "%A, %d. %B %Y um %H:%M Uhr"
+      date_only: "%d.%m.%Y"
+
+  date:
+    formats:
+      short: "%d.%m.%Y"
+      long: "%A, %d. %B %Y"

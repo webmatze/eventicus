@@ -1,0 +1,19 @@
+<% content_for :title, t("cities.index.title") %>
+
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white"><%= t("cities.index.title") %></h1>
+
+  <% if @cities.any? %>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <% @cities.each do |city| %>
+        <%= link_to city_path(city), class: "block bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition" do %>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white"><%= city.name %></h2>
+          <p class="text-sm text-gray-500 mt-1"><%= city.state %>, <%= city.country %></p>
+          <p class="text-sm text-indigo-600 mt-2"><%= city.event_count %> <%= t("events.index.upcoming").downcase %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500"><%= t("common.no_results") %></p>
+  <% end %>
+</div>
