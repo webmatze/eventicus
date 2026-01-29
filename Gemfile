@@ -42,7 +42,7 @@ gem "image_processing", "~> 1.2"
 
 # === Eventicus Dependencies ===
 # Authentication
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 gem "devise-i18n"
 
 # Friendly URLs
