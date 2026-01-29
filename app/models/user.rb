@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false },
             length: { minimum: 3, maximum: 40 },
             format: { with: /\A[a-zA-Z0-9_]+\z/, message: "only letters, numbers and underscores allowed" }
+  validates :bio, length: { maximum: 500 }, allow_blank: true
 
   # Default timezone
   attribute :time_zone, :string, default: "Berlin"

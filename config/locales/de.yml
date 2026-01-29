@@ -1,4 +1,23 @@
 de:
+  devise:
+    registrations:
+      edit:
+        title: Profil bearbeiten
+        profile: Profil
+        account: Account
+        change_password: Passwort ändern
+        new_password: Neues Passwort
+        leave_blank: Leer lassen, wenn du es nicht ändern möchtest
+        current_password_hint: Wir brauchen dein aktuelles Passwort zur Bestätigung
+        bio_placeholder: Erzähl etwas über dich...
+        bio_hint: Max. 500 Zeichen
+        update: Änderungen speichern
+        danger_zone: Gefahrenzone
+        delete_warning: Das Löschen deines Accounts ist unwiderruflich.
+        delete_account: Account löschen
+        delete_confirm: Bist du sicher? Diese Aktion kann nicht rückgängig gemacht werden.
+        waiting_confirmation: "Warte auf Bestätigung für: %{email}"
+
   activerecord:
     models:
       event: Veranstaltung
@@ -76,6 +95,18 @@ de:
       back_to_categories: Zurück zu Kategorien
       upcoming_events: kommende Events
       filter_by_city: Nach Stadt filtern
+
+  users:
+    show:
+      edit_profile: Profil bearbeiten
+      member_since: "Mitglied seit %{date}"
+      events_created: Events erstellt
+      events_attended: Teilnahmen
+      created_events: Erstellte Events
+      attending: Nimmt teil
+      no_created_events: Noch keine Events erstellt.
+      no_attending_events: Nimmt an keinen kommenden Events teil.
+      browse_events: Events entdecken
 
   navigation:
     events: Veranstaltungen

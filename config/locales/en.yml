@@ -1,4 +1,23 @@
 en:
+  devise:
+    registrations:
+      edit:
+        title: Edit Profile
+        profile: Profile
+        account: Account
+        change_password: Change Password
+        new_password: New Password
+        leave_blank: Leave blank if you don't want to change it
+        current_password_hint: We need your current password to confirm changes
+        bio_placeholder: Tell us about yourself...
+        bio_hint: Max. 500 characters
+        update: Save Changes
+        danger_zone: Danger Zone
+        delete_warning: Deleting your account is permanent and cannot be undone.
+        delete_account: Delete Account
+        delete_confirm: Are you sure? This action cannot be undone.
+        waiting_confirmation: "Waiting confirmation for: %{email}"
+
   activerecord:
     models:
       event: Event
@@ -76,6 +95,18 @@ en:
       back_to_categories: Back to Categories
       upcoming_events: upcoming events
       filter_by_city: Filter by city
+
+  users:
+    show:
+      edit_profile: Edit Profile
+      member_since: "Member since %{date}"
+      events_created: events created
+      events_attended: events attended
+      created_events: Created Events
+      attending: Attending
+      no_created_events: No events created yet.
+      no_attending_events: Not attending any upcoming events.
+      browse_events: Browse Events
 
   navigation:
     events: Events
