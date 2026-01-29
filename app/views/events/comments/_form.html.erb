@@ -1,0 +1,32 @@
+<%= turbo_frame_tag "comment-form" do %>
+  <%= form_with model: [event, comment], class: "mt-6" do |f| %>
+    <div class="flex gap-3">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full object-cover flex-shrink-0" %>
+      <% else %>
+        <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+          <span class="text-indigo-600 text-xs font-medium">
+            <%= current_user.display_name.first.upcase %>
+          </span>
+        </div>
+      <% end %>
+      <div class="flex-1">
+        <% if comment.errors.any? %>
+          <div class="mb-2 text-sm text-red-600 dark:text-red-400">
+            <%= comment.errors.full_messages.join(", ") %>
+          </div>
+        <% end %>
+        <%= f.text_area :body,
+            rows: 2,
+            placeholder: t("comments.placeholder"),
+            class: "w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 text-sm resize-none #{comment.errors[:body].any? ? 'border-red-500' : ''}" %>
+        <div class="mt-2 flex items-center justify-between">
+          <span class="text-xs text-gray-500">
+            <%= t("comments.char_limit", min: 2, max: 2000) %>
+          </span>
+          <%= f.submit t("comments.submit"), class: "inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -90,6 +90,19 @@ en:
     created_at: Created
     updated_at: Updated
 
+  comments:
+    title: Comments
+    none: No comments yet.
+    placeholder: Write a comment...
+    submit: Comment
+    char_limit: "%{min}-%{max} characters"
+    created: Comment was added.
+    deleted: Comment was deleted.
+    confirm_delete: Delete this comment?
+    not_authorized: You can only delete your own comments.
+    sign_in: Sign in
+    to_comment: to comment.
+
   flash:
     event_created: Event was created.
     event_updated: Event was updated.

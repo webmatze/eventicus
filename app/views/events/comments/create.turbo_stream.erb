@@ -1,0 +1,17 @@
+<%# Remove "no comments" placeholder if present %>
+<%= turbo_stream.remove "no-comments" %>
+
+<%# Append the new comment to the list %>
+<%= turbo_stream.append "comments-list" do %>
+  <%= render partial: "events/comments/comment", locals: { comment: @comment } %>
+<% end %>
+
+<%# Reset the form %>
+<%= turbo_stream.replace "comment-form" do %>
+  <%= render partial: "events/comments/form", locals: { event: @event, comment: @event.comments.build } %>
+<% end %>
+
+<%# Update comments count %>
+<%= turbo_stream.replace "comments-count" do %>
+  <span id="comments-count" class="text-gray-500 font-normal">(<%= @event.comments.count %>)</span>
+<% end %>

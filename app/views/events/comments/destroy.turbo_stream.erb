@@ -1,0 +1,7 @@
+<%# Remove the comment from the list %>
+<%= turbo_stream.remove dom_id(@comment) %>
+
+<%# Update comments count %>
+<%= turbo_stream.replace "comments-count" do %>
+  <span id="comments-count" class="text-gray-500 font-normal">(<%= @event.comments.count %>)</span>
+<% end %>

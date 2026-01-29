@@ -90,6 +90,19 @@ de:
     created_at: Erstellt am
     updated_at: Aktualisiert am
 
+  comments:
+    title: Kommentare
+    none: Noch keine Kommentare.
+    placeholder: Schreibe einen Kommentar...
+    submit: Kommentieren
+    char_limit: "%{min}-%{max} Zeichen"
+    created: Kommentar wurde hinzugefügt.
+    deleted: Kommentar wurde gelöscht.
+    confirm_delete: Kommentar wirklich löschen?
+    not_authorized: Du darfst nur deine eigenen Kommentare löschen.
+    sign_in: Anmelden
+    to_comment: um zu kommentieren.
+
   flash:
     event_created: Veranstaltung wurde erstellt.
     event_updated: Veranstaltung wurde aktualisiert.

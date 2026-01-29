@@ -91,52 +91,31 @@
       <!-- Attendees Section -->
       <%= render "events/attendees_section", event: @event %>
 
-      <!-- Comments Section (Placeholder) -->
+      <!-- Comments Section -->
       <div id="comments-section" class="border-t border-gray-200 dark:border-gray-700 pt-8">
         <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          Kommentare
-          <span class="text-gray-500 font-normal">(<%= @event.comments.count %>)</span>
+          <%= t("comments.title") %>
+          <span id="comments-count" class="text-gray-500 font-normal">(<%= @event.comments.count %>)</span>
         </h2>
         
-        <% if @event.comments.any? %>
-          <div class="space-y-4">
-            <% @event.comments.oldest_first.each do |comment| %>
-              <div class="flex gap-3">
-                <% if comment.user&.avatar&.attached? %>
-                  <%= image_tag comment.user.avatar, class: "w-8 h-8 rounded-full object-cover flex-shrink-0" %>
-                <% else %>
-                  <div class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center flex-shrink-0">
-                    <span class="text-gray-600 dark:text-gray-300 text-xs font-medium"><%= comment.user&.display_name&.first&.upcase || "?" %></span>
-                  </div>
-                <% end %>
-                <div class="flex-1 bg-gray-50 dark:bg-gray-800 rounded-lg px-4 py-3">
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="font-medium text-gray-900 dark:text-white text-sm">
-                      <%= comment.user&.display_name || "Anonym" %>
-                    </span>
-                    <span class="text-xs text-gray-500">
-                      <%= time_ago_in_words(comment.created_at) %> ago
-                    </span>
-                  </div>
-                  <p class="text-gray-700 dark:text-gray-300 text-sm"><%= comment.body %></p>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p class="text-gray-500">Noch keine Kommentare.</p>
+        <div id="comments-list" class="space-y-4">
+          <% if @event.comments.any? %>
+            <%= render partial: "events/comments/comment", collection: @event.comments.oldest_first, as: :comment %>
+          <% end %>
+        </div>
+
+        <% if @event.comments.empty? %>
+          <p id="no-comments" class="text-gray-500 mb-4"><%= t("comments.none") %></p>
         <% end %>
 
-        <!-- Comment Form (für später) -->
+        <!-- Comment Form -->
         <% if user_signed_in? %>
-          <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
-            <p class="text-gray-500 text-sm text-center">💬 Kommentar-Formular kommt bald...</p>
-          </div>
+          <%= render partial: "events/comments/form", locals: { event: @event, comment: @event.comments.build } %>
         <% else %>
           <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
             <p class="text-gray-600 dark:text-gray-400">
-              <%= link_to "Anmelden", new_user_session_path, class: "text-indigo-600 hover:text-indigo-500 font-medium" %> 
-              um zu kommentieren.
+              <%= link_to t("comments.sign_in"), new_user_session_path, class: "text-indigo-600 hover:text-indigo-500 font-medium" %> 
+              <%= t("comments.to_comment") %>
             </p>
           </div>
         <% end %>
