@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eventicus//Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Eventicus - Upcoming Events
+X-WR-TIMEZONE:Europe/Berlin
+<% @events.each do |event| %>
+<%= render partial: "feeds/events/vevent", locals: { event: event } %>
+<% end %>
+END:VCALENDAR

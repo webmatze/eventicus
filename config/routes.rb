@@ -35,10 +35,16 @@ Rails.application.routes.draw do
 
   # Feeds (no locale needed)
   namespace :feeds do
-    get "events", to: "events#index", defaults: { format: :rss }
-    get "events/:city", to: "events#city", defaults: { format: :rss }
-    get "ical/events", to: "events#ical", defaults: { format: :ics }
-    get "ical/events/:city", to: "events#city_ical", defaults: { format: :ics }
+    # RSS Feeds
+    get "events", to: "events#index", defaults: { format: :rss }, as: :events
+    get "events/city/:city", to: "events#city", defaults: { format: :rss }, as: :city
+    get "events/category/:category", to: "events#category", defaults: { format: :rss }, as: :category
+    
+    # iCal Feeds
+    get "ical/events", to: "events#ical", defaults: { format: :ics }, as: :ical
+    get "ical/events/city/:city", to: "events#city_ical", defaults: { format: :ics }, as: :city_ical
+    get "ical/events/category/:category", to: "events#category_ical", defaults: { format: :ics }, as: :category_ical
+    get "ical/event/:id", to: "events#show", defaults: { format: :ics }, as: :event_ical
   end
 
   # Root

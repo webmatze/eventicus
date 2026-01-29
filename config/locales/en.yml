@@ -64,6 +64,8 @@ en:
       when: When
       where: Where
       back: Back to list
+      add_to_calendar: Add to Calendar
+      share: Share
     form:
       create: Create Event
       update: Save Changes

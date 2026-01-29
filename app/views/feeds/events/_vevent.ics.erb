@@ -1,0 +1,14 @@
+BEGIN:VEVENT
+UID:<%= event.id %>@eventicus
+DTSTAMP:<%= Time.current.utc.strftime("%Y%m%dT%H%M%SZ") %>
+DTSTART:<%= event.starts_at.utc.strftime("%Y%m%dT%H%M%SZ") %>
+DTEND:<%= event.ends_at.utc.strftime("%Y%m%dT%H%M%SZ") %>
+SUMMARY:<%= ical_escape(event.title) %>
+DESCRIPTION:<%= ical_escape(event.description.to_s.truncate(500)) %>
+LOCATION:<%= ical_escape([event.location.name, event.location.street, "#{event.location.zip} #{event.location.city.name}"].join(", ")) %>
+URL:<%= event_url(event) %>
+<% if event.category %>
+CATEGORIES:<%= ical_escape(event.category.name) %>
+<% end %>
+STATUS:CONFIRMED
+END:VEVENT

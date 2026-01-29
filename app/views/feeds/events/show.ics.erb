@@ -1,0 +1,9 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eventicus//Events//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:<%= @event.title %>
+X-WR-TIMEZONE:Europe/Berlin
+<%= render partial: "feeds/events/vevent", locals: { event: @event } %>
+END:VCALENDAR
