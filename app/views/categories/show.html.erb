@@ -1,25 +1,71 @@
 <% content_for :title, t("categories.show.events_in_category", category: @category.name) %>
 
-<div class="space-y-6">
+<div class="space-y-8">
+  <!-- Back Link -->
+  <div>
+    <%= link_to categories_path, class: "inline-flex items-center gap-2 text-gray-600 hover:text-indigo-600 transition" do %>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      <%= t("categories.show.back_to_categories") %>
+    <% end %>
+  </div>
+
   <!-- Header -->
-  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-    <div class="flex items-center gap-4">
-      <div class="flex-shrink-0 w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-xl flex items-center justify-center">
-        <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-lg p-8 text-white">
+    <div class="flex items-center gap-6">
+      <div class="flex-shrink-0 w-20 h-20 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
         </svg>
       </div>
       <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white"><%= @category.name %></h1>
-        <p class="text-gray-600 dark:text-gray-400"><%= @category.events.upcoming.count %> kommende Events</p>
+        <h1 class="text-3xl font-bold"><%= @category.name %></h1>
+        <div class="flex items-center gap-2 mt-2">
+          <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span><%= @category.events.upcoming.count %> <%= t("categories.show.upcoming_events") %></span>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- City Filter -->
+  <% if @cities.any? %>
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+          </svg>
+          <%= t("categories.show.filter_by_city") %>:
+        </span>
+        
+        <%= link_to t("common.all"), 
+            category_path(@category), 
+            class: "px-3 py-1.5 rounded-full text-sm font-medium transition #{@selected_city.nil? ? 'bg-purple-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-purple-100 dark:hover:bg-purple-900/50'}" %>
+        
+        <% @cities.each do |city| %>
+          <%= link_to city.name, 
+              category_path(@category, city: city.slug), 
+              class: "px-3 py-1.5 rounded-full text-sm font-medium transition #{@selected_city&.id == city.id ? 'bg-purple-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-purple-100 dark:hover:bg-purple-900/50'}" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <!-- Events -->
   <div>
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-      <%= t("categories.show.events_in_category", category: @category.name) %>
+    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+      <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      </svg>
+      <% if @selected_city %>
+        <%= t("categories.show.events_in_city", category: @category.name, city: @selected_city.name) %>
+      <% else %>
+        <%= t("categories.show.events_in_category", category: @category.name) %>
+      <% end %>
     </h2>
 
     <% if @events.any? %>
@@ -33,7 +79,12 @@
         <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
       </div>
     <% else %>
-      <p class="text-gray-500"><%= t("events.index.no_events") %></p>
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 text-center">
+        <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <p class="text-gray-500"><%= t("events.index.no_events") %></p>
+      </div>
     <% end %>
   </div>
 </div>

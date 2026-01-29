@@ -1,0 +1,20 @@
+<%= link_to location_path(location), class: "block bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-5 hover:shadow-md hover:border-green-300 dark:hover:border-green-600 transition" do %>
+  <div class="flex items-start gap-4">
+    <div class="flex-shrink-0 w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+      <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+      </svg>
+    </div>
+    <div class="flex-1 min-w-0">
+      <h3 class="font-semibold text-gray-900 dark:text-white truncate"><%= location.name %></h3>
+      <p class="text-sm text-gray-500 truncate"><%= location.street %></p>
+      <% upcoming_count = location.events.upcoming.count %>
+      <% if upcoming_count > 0 %>
+        <p class="text-xs text-indigo-600 dark:text-indigo-400 mt-1">
+          <%= upcoming_count %> <%= upcoming_count == 1 ? "Event" : "Events" %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

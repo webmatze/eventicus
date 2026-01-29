@@ -62,12 +62,20 @@ en:
     show:
       events_in: "Events in %{city}"
       locations_in: "Venues in %{city}"
+      back_to_cities: Back to Cities
+      upcoming_events: upcoming events
+      locations: Locations
+      no_locations: No locations yet.
 
   categories:
     index:
       title: Categories
     show:
       events_in_category: "Events: %{category}"
+      events_in_city: "%{category} in %{city}"
+      back_to_categories: Back to Categories
+      upcoming_events: upcoming events
+      filter_by_city: Filter by city
 
   navigation:
     events: Events
@@ -79,6 +87,7 @@ en:
     signup: Sign up
 
   common:
+    all: All
     back: Back
     edit: Edit
     delete: Delete

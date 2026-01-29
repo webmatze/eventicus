@@ -62,12 +62,20 @@ de:
     show:
       events_in: "Veranstaltungen in %{city}"
       locations_in: "Veranstaltungsorte in %{city}"
+      back_to_cities: Zurück zu Städte
+      upcoming_events: kommende Events
+      locations: Locations
+      no_locations: Noch keine Locations.
 
   categories:
     index:
       title: Kategorien
     show:
       events_in_category: "Veranstaltungen: %{category}"
+      events_in_city: "%{category} in %{city}"
+      back_to_categories: Zurück zu Kategorien
+      upcoming_events: kommende Events
+      filter_by_city: Nach Stadt filtern
 
   navigation:
     events: Veranstaltungen
@@ -79,6 +87,7 @@ de:
     signup: Registrieren
 
   common:
+    all: Alle
     back: Zurück
     edit: Bearbeiten
     delete: Löschen

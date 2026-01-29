@@ -9,6 +9,7 @@ class CitiesController < ApplicationController
   def show
     @city = City.friendly.find(params[:id])
     @events = @city.events.upcoming.includes(:location, :category)
-    @pagy, @events = pagy(@events, limit: 20)
+    @pagy, @events = pagy(@events, limit: 12)
+    @locations = @city.locations.includes(:events).order(:name)
   end
 end
