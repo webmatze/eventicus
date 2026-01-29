@@ -271,7 +271,7 @@ module Seeds
         "Hat jemand noch ein Ticket über?",
         "Mega Location!",
         Faker::Lorem.sentence(word_count: rand(5..15)),
-        "👍",
+        "Super! 👍",
         "Endlich mal wieder was los hier!"
       ].sample
     end
