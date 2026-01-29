@@ -1,0 +1,32 @@
+<% content_for :title, t("locations.index.title") %>
+
+<div class="space-y-6">
+  <h1 class="text-3xl font-bold text-gray-900 dark:text-white"><%= t("locations.index.title") %></h1>
+
+  <% if @locations.any? %>
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <% @locations.each do |location| %>
+        <%= link_to location_path(location), class: "block bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition" do %>
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold text-gray-900 dark:text-white"><%= location.name %></h2>
+              <p class="text-sm text-gray-500 mt-1"><%= location.city.name %></p>
+              <p class="text-sm text-indigo-600 mt-2"><%= location.events.upcoming.count %> kommende Events</p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  <% else %>
+    <p class="text-gray-500"><%= t("common.no_results") %></p>
+  <% end %>
+</div>

@@ -1,0 +1,43 @@
+<% content_for :title, @location.name %>
+
+<div class="space-y-6">
+  <!-- Header -->
+  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-xl flex items-center justify-center">
+        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white"><%= @location.name %></h1>
+        <p class="text-gray-600 dark:text-gray-400 mt-1">
+          <%= @location.street %><br>
+          <%= @location.zip %> <%= @location.city.name %>
+        </p>
+        <p class="text-sm text-gray-500 mt-2">
+          <%= link_to @location.city.name, city_path(@location.city), class: "text-indigo-600 hover:text-indigo-500" %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events at this location -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      <%= t("locations.show.events_here") %>
+      <span class="text-gray-500 font-normal">(<%= @events.count %>)</span>
+    </h2>
+
+    <% if @events.any? %>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <% @events.each do |event| %>
+          <%= render "events/event_card", event: event %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-gray-500"><%= t("events.index.no_events") %></p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<% if user_signed_in? %>
+  <% if attending %>
+    <!-- Already attending -->
+    <div class="text-center">
+      <div class="inline-flex items-center gap-2 text-green-600 dark:text-green-400 mb-3">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/>
+        </svg>
+        <span class="font-semibold"><%= t("events.show.attending") %></span>
+      </div>
+      
+      <%= button_to unattend_event_path(event), method: :delete, class: "w-full py-3 px-4 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-medium hover:border-red-300 hover:text-red-600 dark:hover:text-red-400 transition" do %>
+        Teilnahme absagen
+      <% end %>
+    </div>
+  <% else %>
+    <!-- Not attending yet -->
+    <% if event.upcoming? %>
+      <%= button_to attend_event_path(event), method: :post, class: "w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition flex items-center justify-center gap-2" do %>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+        </svg>
+        <%= t("events.show.attend") %>
+      <% end %>
+      <p class="text-center text-sm text-gray-500 mt-3">
+        <%= event.attendee_count %> <%= event.attendee_count == 1 ? "Person nimmt" : "Personen nehmen" %> teil
+      </p>
+    <% else %>
+      <div class="text-center text-gray-500">
+        <p>Dieses Event ist bereits vorbei.</p>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <!-- Not logged in -->
+  <div class="text-center">
+    <p class="text-gray-600 dark:text-gray-400 mb-4">
+      Möchtest du teilnehmen?
+    </p>
+    <%= link_to new_user_session_path, class: "w-full inline-block py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition text-center" do %>
+      Anmelden zum Teilnehmen
+    <% end %>
+    <p class="text-sm text-gray-500 mt-3">
+      <%= event.attendee_count %> <%= event.attendee_count == 1 ? "Person nimmt" : "Personen nehmen" %> teil
+    </p>
+  </div>
+<% end %>
