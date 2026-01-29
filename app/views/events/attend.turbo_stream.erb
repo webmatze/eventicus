@@ -1,0 +1,27 @@
+<%# Update the attendance button %>
+<%= turbo_stream.replace "attendance-button-#{@event.id}" do %>
+  <%= render "events/attendance_button", event: @event, attending: current_user.attending?(@event) %>
+<% end %>
+
+<%# Update the attendees section %>
+<%= turbo_stream.replace "attendees-section-#{@event.id}" do %>
+  <%= render "events/attendees_section", event: @event %>
+<% end %>
+
+<%# Update attendee count in sidebar %>
+<%= turbo_stream.replace "attendee-count-#{@event.id}" do %>
+  <span id="attendee-count-<%= @event.id %>">
+    <%= @event.attendee_count %> <%= @event.attendee_count == 1 ? "Person nimmt" : "Personen nehmen" %> teil
+  </span>
+<% end %>
+
+<%# Flash message %>
+<%= turbo_stream.prepend "flash-messages" do %>
+  <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg animate-fade-in" data-controller="auto-dismiss" data-auto-dismiss-delay-value="3000">
+    <% if current_user.attending?(@event) %>
+      🎉 Du nimmst jetzt teil!
+    <% else %>
+      👋 Teilnahme wurde entfernt.
+    <% end %>
+  </div>
+<% end %>

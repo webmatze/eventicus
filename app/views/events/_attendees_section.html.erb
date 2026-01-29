@@ -1,0 +1,29 @@
+<div id="attendees-section-<%= event.id %>">
+  <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+    <%= t("events.show.attendees") %> 
+    <span class="text-gray-500 font-normal">(<%= event.attendee_count %>)</span>
+  </h2>
+  
+  <% if event.attendees.any? %>
+    <div class="flex flex-wrap gap-2">
+      <% event.attendees.limit(20).each do |attendee| %>
+        <%= link_to user_path(attendee.username), class: "group" do %>
+          <% if attendee.avatar.attached? %>
+            <%= image_tag attendee.avatar, class: "w-10 h-10 rounded-full object-cover ring-2 ring-white dark:ring-gray-800 group-hover:ring-indigo-500 transition", title: attendee.display_name %>
+          <% else %>
+            <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center ring-2 ring-white dark:ring-gray-800 group-hover:ring-indigo-500 transition" title="<%= attendee.display_name %>">
+              <span class="text-gray-600 dark:text-gray-300 text-sm font-medium"><%= attendee.display_name.first.upcase %></span>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% if event.attendee_count > 20 %>
+        <div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+          <span class="text-gray-600 dark:text-gray-300 text-xs font-medium">+<%= event.attendee_count - 20 %></span>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500">Noch keine Teilnehmer. Sei der Erste!</p>
+  <% end %>
+</div>
