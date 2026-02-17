@@ -55,7 +55,7 @@ gem "geocoder", "~> 1.8"
 gem "icalendar", "~> 2.10"
 
 # Pagination
-gem "pagy", "~> 9.0"
+gem "pagy", "~> 43.2"
 
 # Internationalization
 gem "rails-i18n", "~> 8.0"
