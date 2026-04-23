@@ -71,11 +71,11 @@ module Seeds
 
     def call
       puts "Seeding base data..."
-      
+
       create_categories
       create_cities
       create_locations
-      
+
       puts "Base data seeding complete!"
     end
 

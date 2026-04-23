@@ -15,9 +15,9 @@ namespace :db do
     desc "Reset database and seed with demo data"
     task reset: :environment do
       puts "🗑️  Resetting database..."
-      
+
       # Clear all data
-      [Comment, Attendance, Event, Location, Category, City, User].each do |model|
+      [ Comment, Attendance, Event, Location, Category, City, User ].each do |model|
         model.delete_all
         puts "   Cleared #{model.name}"
       end
@@ -25,7 +25,7 @@ namespace :db do
       # Re-seed
       Rake::Task["db:seed:base"].invoke
       Rake::Task["db:seed:demo"].invoke
-      
+
       puts "\n✅ Database reset complete!"
     end
 
@@ -41,4 +41,4 @@ namespace :db do
 end
 
 desc "Seed database with base + demo data"
-task seed_all: ["db:seed:base", "db:seed:demo"]
+task seed_all: [ "db:seed:base", "db:seed:demo" ]

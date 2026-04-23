@@ -21,15 +21,15 @@ class Location < ApplicationRecord
   scope :geocoded, -> { where.not(latitude: nil, longitude: nil) }
 
   def full_address
-    [street, "#{zip} #{city.name}", city.country].compact.join(", ")
+    [ street, "#{zip} #{city.name}", city.country ].compact.join(", ")
   end
 
   def short_address
-    [street, city.name].compact.join(", ")
+    [ street, city.name ].compact.join(", ")
   end
 
   def coordinates
-    [latitude, longitude] if geocoded?
+    [ latitude, longitude ] if geocoded?
   end
 
   def geocoded?

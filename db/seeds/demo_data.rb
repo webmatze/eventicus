@@ -68,13 +68,13 @@ module Seeds
     }.freeze
 
     GENRES = %w[Indie Rock Pop Electronic Techno House Jazz Soul Funk Hip-Hop Metal Punk Reggae].freeze
-    ARTISTS = ["Die Ärzte", "Bilderbuch", "AnnenMayKantereit", "Kraftwerk", "Fettes Brot", "Deichkind", "Tocotronic", "Kettcar", "Von Wegen Lisbeth", "Giant Rooks"].freeze
+    ARTISTS = [ "Die Ärzte", "Bilderbuch", "AnnenMayKantereit", "Kraftwerk", "Fettes Brot", "Deichkind", "Tocotronic", "Kettcar", "Von Wegen Lisbeth", "Giant Rooks" ].freeze
     TOPICS = %w[Tech Ruby Rails AI Design UX Product Data Security Cloud DevOps].freeze
-    SKILLS = ["Fotografie", "Malerei", "Kochen", "Yoga", "Meditation", "Keramik", "Programmieren", "Schreiben", "Musik", "Tanz"].freeze
+    SKILLS = [ "Fotografie", "Malerei", "Kochen", "Yoga", "Meditation", "Keramik", "Programmieren", "Schreiben", "Musik", "Tanz" ].freeze
     SPORTS = %w[Fußball Basketball Volleyball Tennis Tischtennis Badminton Yoga Laufen Schwimmen].freeze
-    COMEDIANS = ["Carolin Kebekus", "Felix Lobrecht", "Hazel Brugger", "Torsten Sträter", "Chris Tall", "Özcan Cosar"].freeze
-    PLAYS = ["Hamlet", "Faust", "Die Räuber", "Woyzeck", "Der Besuch der alten Dame", "Warten auf Godot", "Die Physiker"].freeze
-    AUTHORS = ["Shakespeare", "Goethe", "Schiller", "Büchner", "Dürrenmatt", "Beckett"].freeze
+    COMEDIANS = [ "Carolin Kebekus", "Felix Lobrecht", "Hazel Brugger", "Torsten Sträter", "Chris Tall", "Özcan Cosar" ].freeze
+    PLAYS = [ "Hamlet", "Faust", "Die Räuber", "Woyzeck", "Der Besuch der alten Dame", "Warten auf Godot", "Die Physiker" ].freeze
+    AUTHORS = [ "Shakespeare", "Goethe", "Schiller", "Büchner", "Dürrenmatt", "Beckett" ].freeze
     DAYS = %w[Montag Dienstag Mittwoch Donnerstag Freitag Samstag Sonntag].freeze
     THEMES = %w[Tropical Retro Neon Glitter Cosmic Vintage Future].freeze
 
@@ -161,7 +161,7 @@ module Seeds
         end
 
         # Duration: 1-6 hours typically
-        duration = [1, 2, 3, 4, 5, 6, 8, 12].sample.hours
+        duration = [ 1, 2, 3, 4, 5, 6, 8, 12 ].sample.hours
         ends_at = starts_at + duration
 
         title = generate_title(category.name)
@@ -187,7 +187,7 @@ module Seeds
 
     def create_attendances
       events = Event.all.to_a
-      
+
       events.each do |event|
         # 0-15 random attendees per event
         attendee_count = rand(0..15)
@@ -208,7 +208,7 @@ module Seeds
 
       events.each do |event|
         comment_count = rand(0..5)
-        
+
         comment_count.times do
           Comment.create!(
             commentable: event,
@@ -222,7 +222,7 @@ module Seeds
     end
 
     def generate_title(category_name)
-      templates = EVENT_TITLE_TEMPLATES[category_name] || ["%{theme} Event"]
+      templates = EVENT_TITLE_TEMPLATES[category_name] || [ "%{theme} Event" ]
       template = templates.sample
 
       template % {
@@ -249,7 +249,7 @@ module Seeds
       ].sample
 
       body = Faker::Lorem.paragraphs(number: rand(2..4)).join("\n\n")
-      
+
       outro = [
         "Tickets an der Abendkasse verfügbar.",
         "Einlass ab 18 Jahren.",

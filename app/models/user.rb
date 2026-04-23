@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   def display_name
     if first_name.present? || last_name.present?
-      [first_name, last_name].compact.join(" ")
+      [ first_name, last_name ].compact.join(" ")
     else
       username
     end

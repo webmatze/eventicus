@@ -10,7 +10,7 @@ class City < ApplicationRecord
   validates :name, presence: true
   validates :state, presence: true
   validates :country, presence: true
-  validates :name, uniqueness: { scope: [:country, :state] }
+  validates :name, uniqueness: { scope: [ :country, :state ] }
 
   # Scopes
   scope :ordered, -> { order(:name) }

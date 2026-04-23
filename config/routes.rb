@@ -10,27 +10,27 @@ Rails.application.routes.draw do
         post :attend
         delete :unattend
       end
-      resources :comments, only: [:create, :destroy], module: :events
+      resources :comments, only: [ :create, :destroy ], module: :events
     end
 
     # Locations (Venues)
-    resources :locations, only: [:index, :show] do
-      resources :events, only: [:index], module: :locations
+    resources :locations, only: [ :index, :show ] do
+      resources :events, only: [ :index ], module: :locations
     end
 
     # Cities
-    resources :cities, only: [:index, :show] do
-      resources :events, only: [:index], module: :cities
-      resources :locations, only: [:index], module: :cities
+    resources :cities, only: [ :index, :show ] do
+      resources :events, only: [ :index ], module: :cities
+      resources :locations, only: [ :index ], module: :cities
     end
 
     # Categories
-    resources :categories, only: [:index, :show] do
-      resources :events, only: [:index], module: :categories
+    resources :categories, only: [ :index, :show ] do
+      resources :events, only: [ :index ], module: :categories
     end
 
     # User profiles
-    resources :users, only: [:show], param: :username
+    resources :users, only: [ :show ], param: :username
   end
 
   # Feeds (no locale needed)
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get "events", to: "events#index", defaults: { format: :rss }, as: :events
     get "events/city/:city", to: "events#city", defaults: { format: :rss }, as: :city
     get "events/category/:category", to: "events#category", defaults: { format: :rss }, as: :category
-    
+
     # iCal Feeds
     get "ical/events", to: "events#ical", defaults: { format: :ics }, as: :ical
     get "ical/events/city/:city", to: "events#city_ical", defaults: { format: :ics }, as: :city_ical

@@ -17,9 +17,9 @@ xml.rss version: "2.0", "xmlns:atom" => "http://www.w3.org/2005/Atom" do
         xml.link event_url(event)
         xml.guid event_url(event), isPermaLink: "true"
         xml.pubDate event.created_at.to_fs(:rfc822)
-        
+
         xml.category event.category.name if event.category
-        
+
         if event.cover_image.attached?
           xml.enclosure url: url_for(event.cover_image), type: event.cover_image.content_type, length: event.cover_image.byte_size
         end

@@ -72,7 +72,7 @@ class Event < ApplicationRecord
     event.last_modified = Icalendar::Values::DateTime.new(updated_at)
 
     if location.geocoded?
-      event.geo = Icalendar::Values::Geo.new([location.latitude, location.longitude])
+      event.geo = Icalendar::Values::Geo.new([ location.latitude, location.longitude ])
     end
 
     event
