@@ -1,8 +1,7 @@
 # Pagy configuration
 # See https://ddnexus.github.io/pagy/
 
-require "pagy/extras/overflow"
-require "pagy/extras/i18n"
+# Pagy 43+: overflow is handled natively (empty results for out-of-range pages)
+# i18n is available via Pagy::I18n module
 
-Pagy::DEFAULT[:limit] = 20
-Pagy::DEFAULT[:overflow] = :last_page
+Pagy::OPTIONS[:limit] = 20
