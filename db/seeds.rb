@@ -1,5 +1,5 @@
 # Main seeds file
-# 
+#
 # Usage:
 #   rails db:seed              - Runs base + demo data
 #   rails db:seed:base         - Only base data (categories, cities, locations)
