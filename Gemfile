@@ -52,7 +52,7 @@ gem "friendly_id", "~> 5.5"
 gem "geocoder", "~> 1.8"
 
 # Calendar export
-gem "icalendar", "~> 2.10"
+gem "icalendar", "~> 2.12"
 
 # Pagination
 gem "pagy", "~> 43.5"
