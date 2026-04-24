@@ -147,7 +147,7 @@ GEM
     i18n-js (4.2.4)
       glob (>= 0.4.0)
       i18n
-    icalendar (2.12.1)
+    icalendar (2.12.2)
       base64
       ice_cube (~> 0.16)
       logger
@@ -450,7 +450,7 @@ DEPENDENCIES
   friendly_id (~> 5.5)
   geocoder (~> 1.8)
   i18n-js (~> 4.2)
-  icalendar (~> 2.10)
+  icalendar (~> 2.12)
   image_processing (~> 1.2)
   importmap-rails
   kamal
